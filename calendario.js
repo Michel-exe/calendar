@@ -3,7 +3,7 @@ let lasemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes",
 let diassemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 diassemana = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
 
-window.onload = function () {
+window.onload = ()=> {
     hoy = new Date();
     diasemhoy = hoy.getDay();
     diameshoy = hoy.getDate();
@@ -25,17 +25,16 @@ window.onload = function () {
     primeralinea()
     escribirdias()
 }
-function cabecera() {
+cabecera = () => {
     tit.innerHTML = meses[mescal] + " - " + annocal;
 }
-//primera línea de tabla: días de la semana.
-function primeralinea() {
+primeralinea = () => {
     for (i = 0; i < 7; i++) {
         celda0 = f0.getElementsByTagName("section")[i];
         celda0.innerHTML = diassemana[i]
     }
 }
-function escribirdias() {
+escribirdias = async () => {
     primeromes = new Date(annocal, mescal, "1")
     prsem = primeromes.getDay()
     prsem--;
@@ -46,16 +45,22 @@ function escribirdias() {
     empezar = primeromes.setDate(prcelda)
     diames = new Date()
     diames.setTime(empezar);
-    
+    let meses="";
     for (i = 1; i < 7; i++) {
         fila = document.getElementById("fila" + i);
         for (j = 0; j < 7; j++) {
             midia = diames.getDate()
             mimes = diames.getMonth()
             mianno = diames.getFullYear()
-            celda = fila.getElementsByTagName("section")[j];
 
-            celda.classList.add("day_"+(midia.toString().padStart(2,"0"))+"/"+((mimes+1).toString().padStart(2,"0"))+"/"+mianno);
+            meses+= !meses.includes(mimes.toString().padStart(2,"0")) ? "."+(mimes.toString().padStart(2,"0")) : ""
+
+            celda = fila.getElementsByTagName("section")[j];
+            celda.lastElementChild.innerHTML=""
+            celda.style.background="#fff"
+            // console.log(celda.lastElementChild);
+            celda.removeAttribute("class")
+            celda.classList.add("day_"+(midia.toString().padStart(2,"0"))+"-"+((mimes+1).toString().padStart(2,"0"))+"-"+mianno);
             
             celda.firstElementChild.innerHTML = midia;
 
@@ -78,8 +83,10 @@ function escribirdias() {
             diames.setDate(midia);
         }
     }
+    localStorage.setItem("mes",parseInt(meses.split(".")[2])+1)
+    await eventos()
 }
-function mesantes() {
+mesantes = () => {
     nuevomes = new Date() 
     primeromes--; 
     nuevomes.setTime(primeromes) 
@@ -88,7 +95,7 @@ function mesantes() {
     cabecera() 
     escribirdias() 
 }
-function mesdespues() {
+mesdespues = () => {
     nuevomes = new Date() 
     tiempounix = primeromes.getTime() 
     tiempounix = tiempounix + (45 * 24 * 60 * 60 * 1000) 
@@ -98,13 +105,13 @@ function mesdespues() {
     cabecera() 
     escribirdias() 
 }
-function actualizar() {
+actualizar = () => {
     mescal = hoy.getMonth();
     annocal = hoy.getFullYear();
     cabecera()
     escribirdias()
 }
-function mifecha() {
+mifecha = () => {
     mianno = document.buscar.buscaanno.value;
     listameses = document.buscar.buscames;
     opciones = listameses.options;

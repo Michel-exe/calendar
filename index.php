@@ -110,7 +110,8 @@
             </nav>
         </main>
     </div>
-    <script src="code.js"></script>
+    <script src="eventos.js"></script>
+    <script src="calendario.js"></script>
 </body>
 
 </html>
