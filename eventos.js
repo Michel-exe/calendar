@@ -21,15 +21,19 @@ const ponerFechas = (res)=>{
         const cad = ".day_"+r.day+"-"+r.mounth+"-"+r.year
         if(document.querySelector(cad)!=null){
             let el =document.querySelector(cad)
-            let div = el.lastElementChild;
+            let div = document.querySelector(cad + " >div")
             el.style.background=r.color
             div.innerHTML+=`
-                <section ide="${r.id}">
+                <div ide="${r.id}">
                     <h3>${r.evento}</h3>
-                </section>
+                </div>
             `;
-        } else{
-            console.log("No ta 😔");
+            if(document.querySelector(cad + " >section")==null){
+                el.innerHTML+=`<section ide="${r.id}" day="${r.day}" mounth="${r.mounth}" year="${r.year}"></section>`
+            }
         }
+        //  else{
+        //     console.log("No ta 😔");
+        // }
     })
 }

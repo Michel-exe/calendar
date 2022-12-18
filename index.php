@@ -8,6 +8,7 @@
 <body>
     <?php
         require("./components/header.php");
+        require("./components/aside.php");
     ?>
     <div id="calendario">
         <div id="buscafecha">
@@ -112,6 +113,7 @@
     </div>
     <script src="eventos.js"></script>
     <script src="calendario.js"></script>
+    <script src="eventosCalendario.js"></script>
 </body>
 
 </html>

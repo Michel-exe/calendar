@@ -10,7 +10,8 @@
     $json = array();
     while($row = mysqli_fetch_array($res)){
         $json[] = array(
-           'evento' => $row['evento'],
+            'id' => $row['id'],
+            'evento' => $row['evento'],
            'description' => $row['description'],
            'ubicacion' => $row['ubicacion'],
            'day' => $row['day'],
